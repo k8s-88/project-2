@@ -78,7 +78,7 @@ function makeGraph(error, transactionsData) {
 
     let maleCEOs = countryDimManagement.group().reduceSum(dc.pluck("ceo_m"));
 
-    let managementChart = dc.compositeChart("#educationByGenderRank");
+    let managementChart = dc.compositeChart("#managementByGenderRank");
 
     managementChart
         .width(500)
