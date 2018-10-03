@@ -39,15 +39,15 @@ function makeGraph(error, transactionsData) {
         .elasticY(true)
         .yAxis().ticks(4)
 
-    
-    
+
+
     let countryDimEducation = ndx.dimension(dc.pluck("country"));
 
     let femaleTertiary = countryDimEducation.group().reduceSum(dc.pluck("tertiary_f"));
 
 
     let maleTertiary = countryDimEducation.group().reduceSum(dc.pluck("tertiary_m"));
-    
+
     let educationChart = dc.compositeChart("#educationByGenderRank");
 
     educationChart
@@ -64,9 +64,6 @@ function makeGraph(error, transactionsData) {
             dc.barChart(educationChart)
             .colors("green")
             .group(femaleTertiary, "tertiary_f"),
-            // .valueAccessor(function(c) {
-            //     return c.value.average;
-            // }),
             dc.barChart(educationChart)
             .colors("red")
             .group(maleTertiary, "tertiary_m")
@@ -74,7 +71,36 @@ function makeGraph(error, transactionsData) {
         .render()
         .yAxis().ticks(4);
 
+    let countryDimManagement = ndx.dimension(dc.pluck("country"));
 
+    let femaleCEOs = countryDimManagement.group().reduceSum(dc.pluck("ceo_f"));
+
+
+    let maleCEOs = countryDimManagement.group().reduceSum(dc.pluck("ceo_m"));
+
+    let managementChart = dc.compositeChart("#educationByGenderRank");
+
+    managementChart
+        .width(500)
+        .height(200)
+        .margins({ top: 10, right: 20, bottom: 50, left: 20 })
+        .dimension(countryDimManagement)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .group(femaleCEOs)
+        .yAxisLabel("% of CEOs")
+        .legend(dc.legend().x(40).y(40).itemHeight(13).gap(5))
+        .compose([
+            dc.barChart(managementChart)
+            .colors("pink")
+            .group(femaleCEOs, "ceo_f"),
+            dc.barChart(managementChart)
+            .colors("blue")
+            .group(maleCEOs, "ceo_m")
+        ])
+        .render()
+        .yAxis().ticks(4);
+        
 
     dc.renderAll();
 }
