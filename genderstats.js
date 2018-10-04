@@ -21,6 +21,31 @@ function makeGraph(error, transactionsData) {
     }
 
 
+
+    let countryDimEqualityIndex = ndx.dimension(dc.pluck("country"));
+
+    let indexScore = countryDimEqualityIndex.group().reduceSum(dc.pluck("equality_index"));
+
+    let equalityIndex = dc.barChart("#indexScore");
+
+    equalityIndex
+        .width(chartWidth)
+        .height(150)
+        .margins({ top: 10, right: 20, bottom: 50, left: 50 })
+        .dimension(countryDimEqualityIndex)
+        .group(indexScore)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .xAxisLabel("country")
+        .elasticY(true)
+        .yAxis().ticks(5)
+
+
+
+
+
+
+
     let countryDim = ndx.dimension(dc.pluck("country"));
 
     let femalePayGap = countryDim.group().reduceSum(dc.pluck("pay_gap"));
@@ -38,6 +63,7 @@ function makeGraph(error, transactionsData) {
         .xAxisLabel("country")
         .elasticY(true)
         .yAxis().ticks(4)
+
 
 
 
@@ -100,7 +126,38 @@ function makeGraph(error, transactionsData) {
         ])
         .render()
         .yAxis().ticks(4);
-        
+
+
+    let countryDimAgreement = ndx.dimension(dc.pluck("country"));
+
+    let maleAgree = countryDimAgreement.group().reduceSum(dc.pluck("q1_agree"));
+
+
+    let maleDisagree = countryDimAgreement.group().reduceSum(dc.pluck("q1_disagree"));
+
+    let question1Chart = dc.compositeChart("#question1Rank");
+
+    question1Chart
+        .width(500)
+        .height(200)
+        .margins({ top: 10, right: 20, bottom: 50, left: 20 })
+        .dimension(countryDimAgreement)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .group(maleAgree)
+        .yAxisLabel("Responses as a %")
+        .legend(dc.legend().x(40).y(40).itemHeight(13).gap(5))
+        .compose([
+            dc.barChart(question1Chart)
+            .colors("green")
+            .group(maleAgree, "q1_agree"),
+            dc.barChart(question1Chart)
+            .colors("red")
+            .group(maleDisagree, "q1_disagree")
+        ])
+        .render()
+        .yAxis().ticks(4);
+
 
     dc.renderAll();
 }
