@@ -20,37 +20,6 @@ function makeGraph(error, transactionsData) {
         chartWidth = windowWidth / 5;
     }
 
-    // ------------------------------QUESTIONS PAGE---------------------------------
-
-
-    // var pokeNameDim = ndx.dimension(function(d) {
-    //     return d["identifier"];
-    // });
-    // var numPokemonNames = pokeNameDim.group();
-
-    // selectField = dc.selectMenu('#pokemon-select')
-    //     .dimension(pokeNameDim)
-    //     .group(numPokemonNames);
-
-// <article class="col-md-12 col-lg-6 chart-column">
-//     <div class="chart-container">
-//         <div class="chart-wrapper totals" data-step="3" data-intro="Here is a list of all the pokemon you currently have selected, if you wish you can choose a pokemon and only see the stats for that specific pokemon." style="..." data-position="top">
-//             <div class="chart-title">Pokemon Select: </div>
-//             <div class="chart-stage">
-//                 <div id="pokemon-select"></div>
-//             </div>
-//         </div>
-//     </div>
-// </article>
-
-
-
-
-
-
-
-
-
 
 
     // -----------------------------------------------------------------------
