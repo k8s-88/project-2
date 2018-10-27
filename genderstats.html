@@ -11,21 +11,106 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 </head>
 
 
 <body>
 
+    <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#equalityIndex" role="tab" aria-controls="home" aria-selected="true">EQUALITY</a>
+    </li>
+
+    <div id="equalityIndex" class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
+        <div class="chart-stage">
+            <div id="indexScore"></div>
+        </div>
+    </div>
+
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+        <li class="nav-item">
+            <a class="nav-link" id="pay-gap" data-toggle="tab" href="#genderPayGap" role="tab" aria-controls="profile" aria-selected="false">PAY GAP</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="education" data-toggle="tab" href="#educationChart" role="tab" aria-controls="contact" aria-selected="false">EDUCATION</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="management" data-toggle="tab" href="#managementChart" role="tab" aria-controls="contact" aria-selected="false">MANAGEMENT</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="questions" data-toggle="tab" href="#question1Chart" role="tab" aria-controls="contact" aria-selected="false">QUESTION_ONE</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+
+        <div id="question1Chart" class="tab-pane fade" role="tabpanel" aria-labelledby="questions">
+            <div class="chart-stage">
+                <div id="question1Rank"></div>
+            </div>
+        </div>
+        <div id="genderPayGap" class="tab-pane fade" role="tabpanel" aria-labelledby="pay-gap">
+            <div class="chart-stage">
+                <div id="femalePayGap"></div>
+            </div>
+        </div>
+        <div id="educationChart" class="tab-pane fade" role="tabpanel" aria-labelledby="education">
+            <div class="chart-stage">
+                <div id="educationByGenderRank"></div>
+            </div>
+        </div>
+        <div id="managementChart" class="tab-pane fade" role="tabpanel" aria-labelledby="management">
+            <div class="chart-stage">
+                <div id="managementByGenderRank"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <article class="col-md-12 col-lg-6 chart-column">
+        <div class="chart-container">
+            <div class="chart-wrapper totals" data-step="3" data-intro="Here is a list of all the countries" style="..." data-position="top">
+                <div class="chart-title">Country Select: </div>
+                <div class="chart-stage">
+                    <div id="country-select"></div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+
+
+
     <!--Content goes here-->
+    <a href="javascript:dc.filterAll(); dc.renderAll();"><strong>Reset All</strong></a>
     <div id="indexScore"></div>
     <div id="femalePayGap"></div>
     <div id="educationByGenderRank"></div>
     <div id="managementByGenderRank"></div>
-    <div id="response"></div>
     <div id="question1Rank"></div>
+    <div id="country-select"></div>
 
     <script src="genderstats.js"></script>
+
+    <!--<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.5/crossfilter.js"></script>-->
+    <!--<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.js'></script>-->
+    <!--<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.0/dc.js"></script>-->
+    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3-queue/1.0.7/d3-queue.js"></script>-->
+    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.5.0/intro.js"></script>-->
+    <!--<script type="text/javascript" src="{{ url_for ('static', filename='js/graphs.js') }}"></script>-->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+
 </body>
 
 </html>

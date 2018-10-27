@@ -20,7 +20,60 @@ function makeGraph(error, transactionsData) {
         chartWidth = windowWidth / 5;
     }
 
+    // ------------------------------QUESTIONS PAGE---------------------------------
 
+
+    // var pokeNameDim = ndx.dimension(function(d) {
+    //     return d["identifier"];
+    // });
+    // var numPokemonNames = pokeNameDim.group();
+
+    // selectField = dc.selectMenu('#pokemon-select')
+    //     .dimension(pokeNameDim)
+    //     .group(numPokemonNames);
+
+// <article class="col-md-12 col-lg-6 chart-column">
+//     <div class="chart-container">
+//         <div class="chart-wrapper totals" data-step="3" data-intro="Here is a list of all the pokemon you currently have selected, if you wish you can choose a pokemon and only see the stats for that specific pokemon." style="..." data-position="top">
+//             <div class="chart-title">Pokemon Select: </div>
+//             <div class="chart-stage">
+//                 <div id="pokemon-select"></div>
+//             </div>
+//         </div>
+//     </div>
+// </article>
+
+
+
+
+
+
+
+
+
+
+
+    // -----------------------------------------------------------------------
+
+
+    // --------------------EQUALITY INDEX AS PIE CHART------------------------
+
+
+    // let countryDimEqualityIndex = ndx.dimension(dc.pluck("country"));
+
+    // let indexScore = countryDimEqualityIndex.group();
+
+    // let equalityIndex = dc.pieChart("#indexScore");
+
+    // equalityIndex
+    //     .width(chartWidth)
+    //     .radius(chartWidth / 2)
+    //     .group(indexScore)
+    //     .dimension(countryDimEqualityIndex)
+
+
+
+    // --------------------EQUALITY INDEX AS BAR CHART------------------------
 
     let countryDimEqualityIndex = ndx.dimension(dc.pluck("country"));
 
@@ -40,11 +93,7 @@ function makeGraph(error, transactionsData) {
         .elasticY(true)
         .yAxis().ticks(5)
 
-
-
-
-
-
+    // ---------------GENDER PAY GAP------------------------
 
     let countryDim = ndx.dimension(dc.pluck("country"));
 
@@ -67,10 +116,14 @@ function makeGraph(error, transactionsData) {
 
 
 
+
+
+    // ----------------------EDUCATION------------------------------
+
+
     let countryDimEducation = ndx.dimension(dc.pluck("country"));
 
     let femaleTertiary = countryDimEducation.group().reduceSum(dc.pluck("tertiary_f"));
-
 
     let maleTertiary = countryDimEducation.group().reduceSum(dc.pluck("tertiary_m"));
 
@@ -88,19 +141,25 @@ function makeGraph(error, transactionsData) {
         .legend(dc.legend().x(40).y(40).itemHeight(13).gap(5))
         .compose([
             dc.barChart(educationChart)
-            .colors("green")
+            .colors("pink")
             .group(femaleTertiary, "tertiary_f"),
             dc.barChart(educationChart)
-            .colors("red")
+            .colors("blue")
             .group(maleTertiary, "tertiary_m")
         ])
         .render()
         .yAxis().ticks(4);
 
+
+
+
+
+    // --------------------MANAGEMENT---------------------------------
+
+
     let countryDimManagement = ndx.dimension(dc.pluck("country"));
 
     let femaleCEOs = countryDimManagement.group().reduceSum(dc.pluck("ceo_f"));
-
 
     let maleCEOs = countryDimManagement.group().reduceSum(dc.pluck("ceo_m"));
 
@@ -113,25 +172,30 @@ function makeGraph(error, transactionsData) {
         .dimension(countryDimManagement)
         .x(d3.scale.ordinal())
         .xUnits(dc.units.ordinal)
-        .group(femaleCEOs)
+        .group(maleCEOs)
         .yAxisLabel("% of CEOs")
         .legend(dc.legend().x(40).y(40).itemHeight(13).gap(5))
         .compose([
             dc.barChart(managementChart)
-            .colors("pink")
-            .group(femaleCEOs, "ceo_f"),
-            dc.barChart(managementChart)
             .colors("blue")
-            .group(maleCEOs, "ceo_m")
+            .group(maleCEOs, "ceo_m"),
+            dc.barChart(managementChart)
+            .colors("pink")
+            .group(femaleCEOs, "ceo_f")
         ])
         .render()
         .yAxis().ticks(4);
 
 
+
+    // -----------------------QUESTIONS------------------------------------
+
+
+
+
     let countryDimAgreement = ndx.dimension(dc.pluck("country"));
 
     let maleAgree = countryDimAgreement.group().reduceSum(dc.pluck("q1_agree"));
-
 
     let maleDisagree = countryDimAgreement.group().reduceSum(dc.pluck("q1_disagree"));
 
@@ -157,6 +221,27 @@ function makeGraph(error, transactionsData) {
         ])
         .render()
         .yAxis().ticks(4);
+
+
+
+ // ------------------------------QUESTIONS PAGE---------------------------------
+
+
+    var countryNames = ndx.dimension(function(d) {
+        return d["country"];
+    });
+    var numCountryNames = countryNames.group();
+
+    selectField = dc.selectMenu('#country-select')
+        .dimension(countryNames)
+        .group(numCountryNames);
+
+
+
+
+    // -----------------------------------------------------------------------
+
+
 
 
     dc.renderAll();
